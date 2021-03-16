@@ -2,6 +2,7 @@ package SimpleIR;
 
 
 import java.io.File;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -58,7 +59,7 @@ public class htmlToXml {
         transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 
         DOMSource source = new DOMSource(result);
-        StreamResult finalResult = new StreamResult(new FileOutputStream(new File("./final.xml")));
+        StreamResult finalResult = new StreamResult(new FileOutputStream(new File("./src/final.xml")));
 
         transformer.transform(source, finalResult);
     }
