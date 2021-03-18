@@ -1,4 +1,4 @@
-package SimpleIR;
+package lecture;
 
 import java.util.*;
 
@@ -33,10 +33,10 @@ import org.xml.sax.SAXException;
   
 
 
-public class kkma {
-    public static void main(String[] args) throws TransformerFactoryConfigurationError, TransformerException, XPathExpressionException, SAXException, IOException, ParserConfigurationException {
+public class makeKeyword {
+    public makeKeyword(String FileName) throws TransformerFactoryConfigurationError, TransformerException, XPathExpressionException, SAXException, IOException, ParserConfigurationException {
         
-    	String inputFile = "./src/final.xml";
+    	String inputFile = FileName;
     	String outputFile = "./src/index.xml";
     	Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new InputSource(inputFile));
 
