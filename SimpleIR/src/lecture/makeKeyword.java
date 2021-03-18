@@ -37,7 +37,7 @@ public class makeKeyword {
     public makeKeyword(String FileName) throws TransformerFactoryConfigurationError, TransformerException, XPathExpressionException, SAXException, IOException, ParserConfigurationException {
         
     	String inputFile = FileName;
-    	String outputFile = "./src/index.xml";
+    	String outputFile = "./result/index.xml";
     	Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new InputSource(inputFile));
 
     	    // locate the node(s)
