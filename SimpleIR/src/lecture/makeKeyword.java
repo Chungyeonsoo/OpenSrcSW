@@ -34,9 +34,10 @@ import org.xml.sax.SAXException;
 
 
 public class makeKeyword {
-    public makeKeyword(String FileName) throws TransformerFactoryConfigurationError, TransformerException, XPathExpressionException, SAXException, IOException, ParserConfigurationException {
+	
+    public void makeKeyword(String fileName) throws TransformerFactoryConfigurationError, TransformerException, XPathExpressionException, SAXException, IOException, ParserConfigurationException {
         
-    	String inputFile = FileName;
+    	String inputFile = fileName;
     	String outputFile = "./result/index.xml";
     	Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new InputSource(inputFile));
 

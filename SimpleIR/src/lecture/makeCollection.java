@@ -22,7 +22,7 @@ import org.w3c.dom.Element;
 
 public class makeCollection {
 
-	public makeCollection(String dirPath) throws IOException, ParserConfigurationException, TransformerException {
+	public void makeCollection(String dirName) throws IOException, ParserConfigurationException, TransformerException {
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
         org.w3c.dom.Document result = docBuilder.newDocument();
@@ -30,7 +30,7 @@ public class makeCollection {
         Element docs = result.createElement("docs");
         result.appendChild(docs);
 
-        File dir = new File(dirPath);
+        File dir = new File(dirName);
         File[] fileList = dir.listFiles();
         int idnumber = 0;
 
