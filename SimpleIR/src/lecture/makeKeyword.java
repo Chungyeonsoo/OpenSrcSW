@@ -2,6 +2,7 @@ package lecture;
 
 import java.util.*;
 
+
 import org.snu.*;
 import org.snu.ids.kkma.index.Keyword;
 import org.snu.ids.kkma.index.KeywordExtractor;

@@ -3,6 +3,8 @@ package lecture;
 
 import java.io.File;
 
+
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -63,5 +65,6 @@ public class makeCollection {
         StreamResult finalResult = new StreamResult(new FileOutputStream(new File("./result/collection.xml")));
 
         transformer.transform(source, finalResult);
+        System.out.println("123");
     }
 }
