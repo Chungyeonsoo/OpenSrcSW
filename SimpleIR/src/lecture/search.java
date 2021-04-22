@@ -36,7 +36,8 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 public class search {
-public void calcSim(String docpath, String query) throws IOException, SAXException, ParserConfigurationException, XPathExpressionException {
+
+	public void innerproduct(String docpath, String query) throws IOException, SAXException, ParserConfigurationException, XPathExpressionException {
 		
 		KeywordExtractor ke = new KeywordExtractor();
 		KeywordList kl = ke.extractKeyword(query, true);
