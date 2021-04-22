@@ -56,7 +56,7 @@ public class kuir {
 				String filepath3 = args[1];
 				String query = args[2];
 				search searching = new search();
-				searching.innerproduct(filepath3, query);
+				searching.calcSim(filepath3, query);
 				break;
 	        default:
 	            System.out.println("error");

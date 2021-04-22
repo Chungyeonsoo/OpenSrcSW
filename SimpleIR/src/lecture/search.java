@@ -36,29 +36,48 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 public class search {
+	public double [] innerproduct(ArrayList<String> keyword, ArrayList<Integer> kwint, int [] docfr, double [] fr, double [][] tfset) throws IOException, SAXException, ParserConfigurationException, XPathExpressionException {
+		//double [] fr = {0,0,0,0,0};
+		double sum = 0;
+    	for (int a = 0; a<5; a ++) {	//	document number
+    		for (int b = 0; b<keyword.size(); b++) {
+    			// multiply query frequency
+    			double first = tfset[a][b] * kwint.get(b);
+    			//System.out.println("ffff " + first);
+    			sum = first + sum;
+    			first = 0.0;		
+    		}
+    		fr[a] = sum;	//save doc num in fr[i]
+    	}
+		return fr;
+	}
+	
 
-	public void innerproduct(String docpath, String query) throws IOException, SAXException, ParserConfigurationException, XPathExpressionException {
+	public void calcSim(String docpath, String query) throws IOException, SAXException, ParserConfigurationException, XPathExpressionException {
 		
-		KeywordExtractor ke = new KeywordExtractor();
-		KeywordList kl = ke.extractKeyword(query, true);
+		
 		
 		Map<String, Integer> ktf = new HashMap<>();
 		ArrayList<String> keyword = new ArrayList<String>();
 		ArrayList<Integer> kwint = new ArrayList<Integer>();
+		KeywordExtractor ke = new KeywordExtractor();
+		KeywordList kl = ke.extractKeyword(query, true);
+	
 		
 		for( int i = 0; i < kl.size(); i++ ) {
 			Keyword kwrd = kl.get(i);
-			ktf.put(kwrd.getString(), kwrd.getCnt());
+			//ktf.put(kwrd.getString(), kwrd.getCnt());
 			keyword.add(kwrd.getString());
 			kwint.add(kwrd.getCnt());
 			
 		}
 		
-		System.out.println("key int = " +keyword);
+		
+		//
 
 		double [] sims = {0,0,0,0,0};
 		
-    	FileInputStream filepath = new FileInputStream("docpath");
+    	FileInputStream filepath = new FileInputStream(docpath);
     	ObjectInputStream objectInputStream = new ObjectInputStream(filepath);
 		Object object = null;
 		try {
@@ -122,8 +141,11 @@ public class search {
     	}
     	
     	Map<Integer, Double> result = new HashMap<>();
-    	double [] fr = {0,0,0,0,0};
+    	
+
     	int [] docfr = {0,1,2,3,4};
+    	double [] fr = {0,0,0,0,0};
+    	fr = innerproduct(keyword, kwint, docfr, fr, tfset);
     	
     	double denominator1 = 0;
     	double denominator2 = 0;
@@ -142,17 +164,6 @@ public class search {
     	}
 
     	
-    	double sum = 0;
-    	for (int a = 0; a<5; a ++) {	//	document number
-    		for (int b = 0; b<keyword.size(); b++) {
-    			// multiply query frequency
-    			double first = tfset[a][b] * kwint.get(b);
-    			//System.out.println("ffff " + first);
-    			sum = first + sum;
-    			first = 0.0;		
-    		}
-    		fr[a] = sum;	//save doc num in fr[i]
-    	}
     	
     	double [] sim = {0,0,0,0,0};
     	for (int forsim = 0; forsim < 5; forsim++) {
@@ -163,7 +174,7 @@ public class search {
     	}
     	
     	for (int adf = 0; adf<5; adf++) {
-    		System.out.println(sim[adf]);
+    		//System.out.println(sim[adf]);
     	}
     	
     	for(int c= 0; c<sim.length;c++) {
@@ -204,15 +215,14 @@ public class search {
 //    		}
 ////    		
 //    	}
-
-    		
+//
+//    		
     	String docpath2 = docpath;
     	Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse("./result/index.xml");
     	XPath xpath = XPathFactory.newInstance().newXPath();
     	
     	Element root = doc.getDocumentElement();
-        //System.out.println("Root : " + root.getTagName());
-        // 각노드의 리스트 취득
+
         NodeList list = root.getElementsByTagName("title");
         
         for(int rank = 0; rank < 3; rank++) {
@@ -220,11 +230,7 @@ public class search {
         	Node item = list.item(docfr[rank]);
         	if(sim[rank] == 0) {
         		break;
-        	}
-//        	if(fr[rank] == 0) {
-//        		break;
-//        	}
-        	if(rank == 2) {
+        	}	if(rank == 2) {
         		System.out.print(rank+1 + "위 :" + item.getTextContent());
         	} else {
         		System.out.print(rank+1 + "위 :" + item.getTextContent() + " ");
@@ -250,9 +256,7 @@ public class search {
     	
         
        // NodeList n1 = root.getElementsByTagName("title");
-
-
-    	
+	
 	}
 
 //	public void calcSim(String docpath, String query) throws IOException, SAXException, ParserConfigurationException, XPathExpressionException {
@@ -423,6 +427,8 @@ public class search {
 //
 //    	
 //	}
+	
+	
 
 }
 
