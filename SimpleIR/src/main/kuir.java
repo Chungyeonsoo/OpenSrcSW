@@ -20,6 +20,13 @@ public class kuir {
 	public static void main(String[] args) throws IOException, ParserConfigurationException, TransformerException, SAXException, XPathExpressionException, TransformerFactoryConfigurationError {
 
 
+//		index index = new index();
+//		String fileName2 = "./result/index.xml";
+//		index.index(fileName2);
+//		search searching = new search();
+//		String filepath3 = "./result/index.post";
+//		String query = "라면에는 면, 분말 스프가 있다.";
+//		searching.calcSim(filepath3, query);
 //		String dirname = "./directory";
 //		String filename = "./src/collection.xml";
 		

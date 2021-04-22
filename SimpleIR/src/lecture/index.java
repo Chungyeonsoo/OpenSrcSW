@@ -93,7 +93,7 @@ public class index {
         }
         
         //	output
-        FileOutputStream fileStream = new FileOutputStream("./result/index2.xml");
+        FileOutputStream fileStream = new FileOutputStream("./result/index.post");
     	ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileStream);
     	
     	objectOutputStream.writeObject(tfidf);
@@ -102,7 +102,7 @@ public class index {
     	System.out.println("create index.post");
     	
     	//	input
-    	FileInputStream filepath = new FileInputStream("./result/index2.xml");
+    	FileInputStream filepath = new FileInputStream("./result/index.post");
     	ObjectInputStream objectInputStream = new ObjectInputStream(filepath);
     	Object object = null;
     	
