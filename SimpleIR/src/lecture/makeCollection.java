@@ -1,7 +1,8 @@
-package SimpleIR;
+package lecture;
 
 
 import java.io.File;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -19,8 +20,9 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.w3c.dom.Element;
 
-public class htmlToXml {
-    public static void main(String[] args) throws IOException, ParserConfigurationException, TransformerException {
+public class makeCollection {
+
+	public makeCollection(String dirPath) throws IOException, ParserConfigurationException, TransformerException {
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
         org.w3c.dom.Document result = docBuilder.newDocument();
@@ -28,9 +30,9 @@ public class htmlToXml {
         Element docs = result.createElement("docs");
         result.appendChild(docs);
 
-        File dir = new File("./dir");
+        File dir = new File(dirPath);
         File[] fileList = dir.listFiles();
-        int number = 0;
+        int idnumber = 0;
 
         for (File input : fileList) {
             if (input.isFile()) {
@@ -38,7 +40,7 @@ public class htmlToXml {
                 Document doc = Jsoup.parse(input, "UTF-8");
 
                 Element elementDoc = result.createElement("doc");
-                elementDoc.setAttribute("id", Integer.toString(number));
+                elementDoc.setAttribute("id", Integer.toString(idnumber));
                 docs.appendChild(elementDoc);
 
                 Element elementTitle = result.createElement("title");
@@ -49,7 +51,7 @@ public class htmlToXml {
                 elementBody.setTextContent(doc.getElementsByTag("p").text());
                 elementDoc.appendChild(elementBody);
 
-                number = number + 1;
+                idnumber = idnumber + 1;
             }
         }
 
@@ -58,7 +60,7 @@ public class htmlToXml {
         transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 
         DOMSource source = new DOMSource(result);
-        StreamResult finalResult = new StreamResult(new FileOutputStream(new File("./final.xml")));
+        StreamResult finalResult = new StreamResult(new FileOutputStream(new File("./result/collection.xml")));
 
         transformer.transform(source, finalResult);
     }
