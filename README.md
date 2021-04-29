@@ -1,2 +1,0 @@
-# OpenSrcSW
-# arrow...?
